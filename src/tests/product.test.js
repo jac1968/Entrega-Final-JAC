@@ -57,6 +57,35 @@ test("Get 👉 'BASE_URL', must return status 200 & res.body.length == 1", async
 
 })
 
+test("Get 👉 'BASE_URL/:id', must return status code 200, and res.body.title === product.title", async () => {
+
+    const res = await request(app)
+       .get(`${BASE_URL}/${productId}`)
+       .set('Authorization', `Bearer ${TOKEN}`)
+
+    expect(res.status).toBe(200)
+    expect(res.body).toBeDefined()
+    expect(res.body.title).toBe(product.title)
+
+   })
+   
+
+test("Put 👉  'BASE_URL/:id', must return status 200 & res.body.title === productUpdate.title", async () => {
+
+    const productUpdate = {
+        title: 'Samsung S-40'
+    }
+
+    const res = await request(app)
+        .put(`${BASE_URL}/${productId}`)
+        .send(productUpdate)
+        .set('Authorization', `Bearer ${TOKEN}`)
+
+    expect(res.status).toBe(200)
+    expect(res.body).toBeDefined()
+    expect(res.body.title).toBe(productUpdate.title)
+
+}) 
         
 test("Delete 👉 'BASE_URL/:id', must return status 204", async () => {
 

@@ -3,10 +3,10 @@ const request = require('supertest')
 const app = require('../app')
 const BASE_URL = '/api/v1/users'
 
-let TOKEN       // Variable for save Token user
-let userId      // Variable for save user id
+let TOKEN          // Variable for save Token user
+let userId         // Variable for save user id
 
-    // Declare object login 
+
 const login = {
     email: "mm@gmail.com",
     password: "maria123"
@@ -18,9 +18,9 @@ beforeAll(async () => {
         .post(`${BASE_URL}/login`)
         .send(login)
 
-        TOKEN = res.body.toke
+        TOKEN = res.body.token
 
-})
+}) 
         
 const user = {
     firstName: "Marian",
@@ -113,6 +113,6 @@ test("Delete 👉 'BASE_URL/:id', must return status 204", async () => {
 
     expect(res.status).toBe(204)
 
-    console.log(TOKEN)
+    
 }) 
     
