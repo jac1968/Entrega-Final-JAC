@@ -12,7 +12,8 @@ const main = async () => {
         app.listen(PORT);
         console.log(`👉 Server running on port ${PORT}`);
         console.log(`👉 Link http://localhost:${PORT}`);
-    } catch (error) {
+    }
+     catch (error) {
         console.log(error)
     }
 }

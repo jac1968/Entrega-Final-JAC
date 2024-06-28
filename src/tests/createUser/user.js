@@ -4,10 +4,10 @@ const User = require("../../models/User")
 const userTest = async () => {
 
     const data = {
-        firstName: "Fabiana de J.",
-        lastName: "Carrasquilla",
-        email: "fc@gmail.com",
-        password: "fabiana123",
+        firstName: "Maria",
+        lastName: "Marin",
+        email: "mm@gmail.com",
+        password: "maria123",
         phone: '4444-3333-2222'
     }
 

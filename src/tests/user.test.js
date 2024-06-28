@@ -6,21 +6,21 @@ const BASE_URL = '/api/v1/users'
 let TOKEN       // Variable for save Token user
 let userId      // Variable for save user id
 
-beforeAll(async () => {
+    // Declare object login 
+const login = {
+    email: "mm@gmail.com",
+    password: "maria123"
+}
 
-    const login = {
-        email: "fc@gmail.com",
-        password: "fabiana123"
-    }
+beforeAll(async () => {
 
     const res = await request(app)
         .post(`${BASE_URL}/login`)
         .send(login)
 
-        TOKEN = res.body.token
+        TOKEN = res.body.toke
 
 })
-        
         
 const user = {
     firstName: "Marian",
@@ -29,7 +29,8 @@ const user = {
     password: "maria123",
     phone: '5555-5555-5555'
 }
-        
+
+
 test("Post  👉  'BASE_URL',  must  return  status  201  &  user.firstName === res.body.firstName", async () => {
 
     const res = await request(app)
@@ -75,6 +76,35 @@ test("Put 👉 'BASE_URL/:id', must return status 200 & res.body.firstName === u
 
 }) 
         
+test("Post Wrong Login 👉 'BASE_URL/login', must return status code 401", async () => {
+
+    login.password = "Wrong Key"   // Change wrong value from password login
+
+    const res = await request(app)
+        .post(`${BASE_URL}/login`)
+        .send(login)
+
+    expect(res.status).toBe(401)
+
+})
+
+
+test("Post Rigth Login 👉 'BASE_URL/:id', must return status 200 & res.body to be defined", async ()=> {
+
+    login.password = "maria123"   // Change rigth value from password login
+
+    const res = await request(app)
+        .post(`${BASE_URL}/login`)
+        .send(login)
+
+    expect(res.status).toBe(200)
+    expect(res.body).toBeDefined()
+    expect(res.body.token).toBeDefined()
+    expect(res.body.user).toBeDefined()
+    expect(res.body.user.email).toBeDefined()
+
+})
+
 test("Delete 👉 'BASE_URL/:id', must return status 204", async () => {
 
     const res = await request(app)
@@ -83,5 +113,6 @@ test("Delete 👉 'BASE_URL/:id', must return status 204", async () => {
 
     expect(res.status).toBe(204)
 
+    console.log(TOKEN)
 }) 
     

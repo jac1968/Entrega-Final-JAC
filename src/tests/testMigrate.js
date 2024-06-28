@@ -11,7 +11,9 @@ const testMigrate = async () => {
         await userTest()      // Create new user for testing
         process.exit()
 
-    } catch (error) {
+    } 
+    
+    catch (error) {
         console.log(error)
     }
 }

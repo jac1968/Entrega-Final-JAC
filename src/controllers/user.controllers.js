@@ -43,7 +43,7 @@ const login = catchError(async(req, res) => {
     if (user) {
         const equal = await bcrypt.compare(password, user.password)
         if (equal) {
-            const token = gentk.sign({user}, process.env.TOKEN_USER, {expiresIn: '6h'})
+            const token = gentk.sign({user}, process.env.TOKEN_USER, {expiresIn: '2h'})
             return res.json({user, token})
         }
     }        

@@ -1,4 +1,4 @@
-        // Router of table users
+   // Router of table users
 const { getAll, create, remove, update, login } = require('../controllers/user.controllers');
 const express = require('express');
 const { verifyJwt } = require('../utils/verifyJWT');
