@@ -50,11 +50,12 @@ const login = catchError(async(req, res) => {
     return res.status(401).json({error: '❌ Invalid entry 🚫'})
 })
 
-        
+        // Exports controllers 
 module.exports = {
     getAll,
     create,
     remove,
     update,
-    login
+    login,
+
 }
