@@ -4,8 +4,7 @@
     const BASE_URL =      '/api/v1/categories'
     const BASE_URL_LOGIN = '/api/v1/users'
 
-    let TOKEN          // Variable for save Token user
-    let categoryId     // Variable for save category id
+    let TOKEN, categoryId       
     
      beforeAll(async () => {
     
@@ -23,7 +22,7 @@
     }) 
 
     const category = {
-        name: "Tv"
+        name: "Celulares"
     }
             
     test("Post  👉  'BASE_URL',  must  return  status  201  &  category.name === res.body.name", async () => {

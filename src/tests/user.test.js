@@ -3,8 +3,7 @@ const request = require('supertest')
 const app = require('../app')
 const BASE_URL = '/api/v1/users'
 
-let TOKEN          // Variable for save Token user
-let userId         // Variable for save user id
+let TOKEN, userId       
 
 
 const login = {

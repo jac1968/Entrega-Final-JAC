@@ -1,11 +1,11 @@
 // tests products endpoints
+require('../models')
 const request = require('supertest')
 const app = require('../app')
 const BASE_URL =      '/api/v1/products'
 const BASE_URL_LOGIN = '/api/v1/users'
 
-let TOKEN          // Variable for save Token user
-let productId      // Variable for save product id
+let TOKEN, productId 
 
  beforeAll(async () => {
 
@@ -19,13 +19,11 @@ let productId      // Variable for save product id
         .send(login)
 
         TOKEN = res.body.token
-
 }) 
 
 const product = {
     title: "Samsung A11-S",
     description: "Celular Samsung A11 color negro mate",
-    categoryId: 1,
     price: 999.99
 }
         
@@ -50,6 +48,7 @@ test("Get 👉 'BASE_URL', must return status 200 & res.body.length == 1", async
     const res = await request(app)
         .get(BASE_URL)
         .set('Authorization', `Bearer ${TOKEN}`)
+        
 
     expect(res.status).toBe(200)
     expect(res.body).toBeDefined()
