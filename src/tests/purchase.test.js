@@ -5,20 +5,25 @@ const Product = require('../models/Product')
 const BASE_URL_LOGIN = '/api/v1/users/login'
 const BASE_URL = '/api/v1/purchase'
 
-let TOKEN, product, purchase
+let TOKEN, product, purchase, userId
+
+afterAll(async () => {
+    await product.destroy()
+});
 
 beforeAll(async () => {
 
-    const body = {
+    const login = {
         email: "mm@gmail.com",
         password: "maria123"
     }
 
     const res = await request(app)
         .post(BASE_URL_LOGIN)
-        .send(body)
+        .send(login)
 
     TOKEN = res.body.token
+    userId = res.body.user.id
 
     product = await Product.create({
         title: 'Samsung S40',
@@ -35,11 +40,6 @@ beforeAll(async () => {
 });
 
 
-afterAll(async () => {
-    await product.destroy()
-});
-
-
 test("Post 👉 'BASE_URL',  must  return  status  201  &  res.body.purchase.userid === purchase.userId",  async () => {
 
     const res = await request(app)
@@ -52,14 +52,14 @@ test("Post 👉 'BASE_URL',  must  return  status  201  &  res.body.purchase.use
     expect(res.body.userId).toBe(purchase.userId)
 });
 
-test("GET 👉 'BASE_URL',  must return status 200 & res.body.purchase.userid === purchase.userId", 
-    async () =>{
+test("GET 👉 'BASE_URL',  must return status 200 & res.body.purchase.userid === purchase.userId", async () =>{
 
     const res = await request(app)
         .get(BASE_URL)
         .set('Authorization', `Bearer ${TOKEN}`)
 
     expect(res.status).toBe(200)
-    expect(res.body).toBeDefined()
+    expect(res.body).toBeDefined()   
     expect(res.body.userId).toBe(purchase.userId)
+
 });
