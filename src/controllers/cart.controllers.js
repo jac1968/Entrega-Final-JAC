@@ -2,13 +2,15 @@ const catchError = require('../utils/catchError');
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+const ProductImg = require('../models/ProductImg');
 
 const getAll = catchError(async(req, res) => {
     const userId = req.user.id 
     const results = await Cart.findAll({ where: {userId}, attributes:{
         exclude:["updatedAt", "createdAt"]},  
         include:[{model: Product, attributes:{exclude:["id", "updatedAt", "createdAt"]},   
-        include:[{model: Category, attributes:["name"]}]
+        include:[{model: Category, attributes:["name"]}],
+        include:[{model: ProductImg}]
     }]})
     return res.json(results);
 });
@@ -26,7 +28,8 @@ const getOne = catchError(async(req, res) => {
     const result = await Cart.findByPk(id, { where: {userId}, attributes:{
         exclude:["updatedAt", "createdAt"]},  
         include:[{model: Product, attributes:{exclude:["id", "updatedAt", "createdAt"]},   
-        include:[{model: Category, attributes:["name"]}]
+        include:[{model: Category, attributes:["name"]}],
+        include:[{model: ProductImg}]
     }]})
     if(!result) return res.sendStatus(404)
     return res.json(result)

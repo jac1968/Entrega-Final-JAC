@@ -5,6 +5,7 @@ const routerProduct = require('./product.router');
 const routerCart = require('./cart.router');
 const { verifyJwt } = require('../utils/verifyJWT');
 const routerPurchase = require('./purchase.router');
+const routerProductImg = require('./productImg.router');
 const router = express.Router();
 
 // Routes
@@ -13,5 +14,6 @@ router.use('/categories', routerCategory)    // Category route
 router.use('/products', routerProduct)       // Product route
 router.use('/cart', verifyJwt, routerCart)   // Cart route private
 router.use('/purchase', verifyJwt, routerPurchase)  // Purchase route private
+router.use('/product_images', verifyJwt, routerProductImg) // ProductImg route private
 
 module.exports = router;

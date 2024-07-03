@@ -2,6 +2,7 @@
 const Cart = require('./Cart')
 const Category = require('./Category')
 const Product = require('./Product')
+const ProductImg = require('./Productimg')
 const Purchase = require('./Purchase')
 const User = require('./User')
 
@@ -24,3 +25,7 @@ User.hasMany(Purchase)
 //  Relationship Purchase - Product (1-N)
 Purchase.belongsTo(Product)
 Product.hasMany(Purchase)
+
+//  Relationship ProductImg - Product (1-N)
+ProductImg.belongsTo(Product)
+Product.hasMany(ProductImg)
